@@ -13,4 +13,27 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
+
+    // Selenium
+    testCompile 'org.seleniumhq.selenium:selenium-java:3.141.59'
+
+    // Selenide
+    testCompile 'com.codeborne:selenide:5.2.0'
+
+    // JBehave
+    testCompile 'org.jbehave:jbehave-core:3.9.5'
+
+    // Cucumber
+    testCompile 'info.cukes:cucumber-java:1.2.2'
+    testCompile 'info.cukes:cucumber-junit:1.2.2'
+}
+
+def jarPath(String jarName) {
+    configurations.testCompile.filter{it.name.startsWith(jarName)}.asPath
+}
+
+task firefox(type: Test) {
+    systemProperties['selenide.browser'] = 'firefox'
+    systemProperties['selenide.headless'] = 'true'
 }
